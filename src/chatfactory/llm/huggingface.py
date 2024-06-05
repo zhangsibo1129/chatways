@@ -1,8 +1,9 @@
 
 import os
 
-from typing import Optional, Dict, List
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from threading import Thread
+from typing import Optional, Dict, List, Any
+from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
 from chatfactory.llm.utils import BaseChatModel, register_llm
 
@@ -25,8 +26,8 @@ class HFChatModel(BaseChatModel):
             model_config = {}
         self.client = AutoModelForCausalLM.from_pretrained(self.model, **model_config)
         self.tokenizer = AutoTokenizer.from_pretrained(self.model)
-
-    def invoke(self, messages: List[Dict], generation_config: Optional[dict] = None) -> str:
+        
+    def _prepare_inputs(self, messages: List[Dict]) -> Any:
         raw_inputs = self.tokenizer.apply_chat_template(
             messages,
             tokenize=False,
@@ -35,6 +36,10 @@ class HFChatModel(BaseChatModel):
        
         device = self.client.device
         model_inputs = self.tokenizer([raw_inputs], return_tensors="pt").to(device)
+        return model_inputs
+
+    def invoke(self, messages: List[Dict], generation_config: Optional[dict] = None) -> str:
+        model_inputs = self._prepare_inputs(messages)
 
         if generation_config is None:
             generation_config = {}
@@ -46,3 +51,16 @@ class HFChatModel(BaseChatModel):
 
         response = self.tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
         return response
+
+    def invoke_stream(self, messages: List[Dict], generation_config: Optional[dict] = None) -> str:
+        model_inputs = self._prepare_inputs(messages)
+
+        if generation_config is None:
+            generation_config = {}
+
+        streamer = TextIteratorStreamer(self.tokenizer, skip_prompt=True, skip_special_tokens=True)
+        generation_kwargs = dict(model_inputs, streamer=streamer)
+        generation_kwargs.update(generation_config)
+        thread = Thread(target=self.client.generate, kwargs=generation_kwargs)
+        thread.start()
+        return streamer

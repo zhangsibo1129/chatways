@@ -41,15 +41,25 @@ bot = SimpleChatBot(
     }
 )
 
-def respond(message, history, system_prompt):
-    response= bot.chat(
+def respond(message, history, system_prompt, stream=True):
+    history.append((message, ""))
+    response = bot.chat(
         message=message,
         history=history,
         system_prompt=system_prompt,
-        generation_config=None
+        generation_config=None,
+        stream=stream
     )
-    history.append((message, response))
-    return "", history
+    if stream:
+        reply = ""
+        for chunk in response:
+            if chunk is not None:
+                reply += chunk
+                history[-1] = (history[-1][0], reply)
+                yield "", history
+    else:
+        history[-1] = (history[-1][0], response)
+        yield "", history
 
 with gr.Blocks(css=CSS) as demo:
     gr.Markdown(HEADER)

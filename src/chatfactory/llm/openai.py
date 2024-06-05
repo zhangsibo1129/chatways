@@ -13,7 +13,7 @@ class OpenAIChatModel(BaseChatModel):
     OpenAI Chat Completions
     """
     
-    default_model: str = "gpt-4"
+    default_model: str = "gpt-3.5-turbo"
     model: str = ""
         
     def setup_model(self, model: Optional[str] = None, model_config: Optional[dict] = None) -> None:
@@ -31,13 +31,34 @@ class OpenAIChatModel(BaseChatModel):
             base_url = os.getenv("OPENAI_BASE_URL", None)
         self.client = OpenAI(api_key=api_key, base_url=base_url)
 
-    def invoke(self, messages: Any, generation_config: Optional[dict] = None) -> str:
+    def _generator_filter(self, response):
+        for chunk in response:
+            content = chunk.choices[0].delta.content
+            if content is not None:
+                yield content
+
+    def invoke(self, messages: Any, generation_config: Optional[dict] = None) -> Any:
         if generation_config is None:
             generation_config = {}
 
+        generation_config.update({"stream": False})
         response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             **generation_config
         )
-        return response.choices[0].message.content
+        response = response.choices[0].message.content
+        return response
+
+    def invoke_stream(self, messages: Any, generation_config: Optional[dict] = None) -> Any:
+        if generation_config is None:
+            generation_config = {}
+
+        generation_config.update({"stream": True})
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            **generation_config
+        )
+        response = self._generator_filter(response)
+        return response

@@ -26,7 +26,7 @@ class SimpleChatBot:
         logger.info(f"Model Config: {model_config}")
         logger.info(f"LLM has been initialized.")
 
-    def chat(self, message: str, history: List[Tuple[str, str]], system_prompt: Optional[str] = None, generation_config: Optional[Dict] = None) -> str:
+    def chat(self, message: str, history: List[Tuple[str, str]], system_prompt: Optional[str] = None, generation_config: Optional[Dict] = None, stream: bool = True) -> str:
         messages = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
@@ -35,6 +35,9 @@ class SimpleChatBot:
                 messages.append({"role": "user", "content": query})
                 messages.append({"role": "assistant", "content": response})
         messages.append({"role": "user", "content": message})
-        
-        response = self.llm.invoke(messages, generation_config)
+        if stream:
+            response = self.llm.invoke_stream(messages, generation_config)
+        else:
+            response = self.llm.invoke(messages, generation_config)
         return response
+    

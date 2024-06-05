@@ -1,4 +1,4 @@
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Any
 from abc import ABC, abstractmethod
 
 
@@ -49,5 +49,5 @@ class BaseChatModel(ABC):
         raise NotImplementedError
         
     @abstractmethod
-    def invoke(self, messages: List[Dict], generation_config: Optional[Dict] = None) -> str:
+    def invoke(self, messages: List[Dict], generation_config: Optional[Dict] = None) -> Any:
         raise NotImplementedError
