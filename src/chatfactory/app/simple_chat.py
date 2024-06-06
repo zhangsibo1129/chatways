@@ -38,6 +38,13 @@ HF_PARAMETERS = [
     ("max_new_tokens", 512, 0, 1024, 1),
 ]
 
+FAKE_PARAMETERS = [
+    ("temperature", 1.0, 0.0, 2.0, 0.01),
+    ("top_k", 50, 0, 100, 1),
+    ("top_p", 1.0, 0.0, 2.0, 0.01),
+    ("max_new_tokens", 512, 0, 1024, 1),
+]
+
    
 def parse_args():
     parser = argparse.ArgumentParser(description="Simple Chat Application")
@@ -63,6 +70,9 @@ def get_generation_config(components):
         parameters = OPENAI_PARAMEATERS
     elif args.llm_engine == "huggingface":
         parameters = HF_PARAMETERS
+    elif args.llm_engine == "fake":
+        parameters = FAKE_PARAMETERS
+        
     parameter_components = components[:int(len(components)/2)]
     availabel_components = components[int(len(components)/2):]
     generation_config = {}
@@ -128,6 +138,8 @@ with gr.Blocks(css=CSS) as demo:
             parameters = OPENAI_PARAMEATERS
         elif args.llm_engine == "huggingface":
             parameters = HF_PARAMETERS
+        elif args.llm_engine == "fake":
+            parameters = FAKE_PARAMETERS
         
         availabel_components = []
         parameter_components = []

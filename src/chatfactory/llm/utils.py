@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 LLM_REGISTRY_MAP = {
     "openai": "OpenAIChatModel",
     "huggingface": "HFChatModel",
+    "fake": "FakeChatModel"
 }
 
 
