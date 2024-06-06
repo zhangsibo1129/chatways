@@ -75,7 +75,7 @@ def get_generation_config(components):
     return generation_config
 
 def respond(message, history, system_prompt, stream, *components):
-    history.append((message, ""))
+    history.append([message, ""])
     generation_config = get_generation_config(components)
     response = bot.chat(
         message=message,
@@ -85,14 +85,12 @@ def respond(message, history, system_prompt, stream, *components):
         stream=stream
     )
     if stream:
-        reply = ""
         for chunk in response:
             if chunk is not None:
-                reply += chunk
-                history[-1] = (history[-1][0], reply)
+                history[-1][1] += chunk 
                 yield "", history
     else:
-        history[-1] = (history[-1][0], response)
+        history[-1][1] = response
         yield "", history
 
 def clean_conversation():
