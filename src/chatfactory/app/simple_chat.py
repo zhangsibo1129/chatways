@@ -19,13 +19,30 @@ CSS = """#chatbot {
 }
 """
 
-HEADER = """# Simple Chat Application
+HEADER = """# Chat
 
 This is a simple chat application that uses a language model to generate responses.
 """
 
+OPENAI_PARAMEATERS = [
+    ("temperature", 1.0, 0.0, 2.0, 0.01),
+    ("top_p", 1.0, 0.0, 1.0, 0.01),
+    ("frequency_penalty", 0.0, -2.0, 2.0, 0.01),
+    ("presence_penalty", 0.0, -2.0, 2.0, 0.01),
+]
+
+HF_PARAMETERS = [
+    ("temperature", 1.0, 0.0, 2.0, 0.01),
+    ("top_k", 50, 0, 100, 1),
+    ("top_p", 1.0, 0.0, 2.0, 0.01),
+    ("max_new_tokens", 512, 0, 1024, 1),
+]
+
+   
 def parse_args():
     parser = argparse.ArgumentParser(description="Simple Chat Application")
+    parser.add_argument("-a", "--address", type=str, default="127.0.0.1", help="Default address is 127.0.0.1")
+    parser.add_argument("-p", "--port", type=int, default=7860, help="Default port is 7860")
     parser.add_argument("-le", "--llm-engine", type=str, default=None, help="The LLM engine to use")
     parser.add_argument("-lm", "--llm-model", type=str, default=None, help="The LLM model path")
     parser.add_argument("-lc", "--llm-model-config", type=str, default=None, help="The LLM model configuration in JSON format")
@@ -41,13 +58,30 @@ bot = SimpleChatBot(
     }
 )
 
-def respond(message, history, system_prompt, stream=True):
+def get_generation_config(components):
+    if args.llm_engine == "openai" or args.llm_engine is None:
+        parameters = OPENAI_PARAMEATERS
+    elif args.llm_engine == "huggingface":
+        parameters = HF_PARAMETERS
+    parameter_components = components[:int(len(components)/2)]
+    availabel_components = components[int(len(components)/2):]
+    generation_config = {}
+    for parameter, parameter_component, availabel_component in zip(parameters, parameter_components, availabel_components):
+        if availabel_component:
+            parameter_component = None
+        generation_config.update(
+            {parameter[0]: parameter_component}
+        )
+    return generation_config
+
+def respond(message, history, system_prompt, stream, *components):
     history.append((message, ""))
+    generation_config = get_generation_config(components)
     response = bot.chat(
         message=message,
         history=history,
         system_prompt=system_prompt,
-        generation_config=None,
+        generation_config=generation_config,
         stream=stream
     )
     if stream:
@@ -61,25 +95,66 @@ def respond(message, history, system_prompt, stream=True):
         history[-1] = (history[-1][0], response)
         yield "", history
 
+def clean_conversation():
+    return "", []
+
+def create_component(label, value, minimum, maximum, step):
+    return gr.Slider(
+        label=label,
+        value=value,
+        minimum=minimum,
+        maximum=maximum,
+        step=step,
+        interactive=True
+    )
+    
+def enable_parameter_slider():
+    return False
+
 with gr.Blocks(css=CSS) as demo:
     gr.Markdown(HEADER)
+        
+    with gr.Row():
+        system_prompt = gr.Textbox(placeholder= "System Prompt", show_label=False, scale=9)
+        stream_component = gr.Checkbox(value=True, label="Stream", interactive=True, scale=1)
 
-    system_prompt = gr.Textbox(placeholder= "System Prompt", show_label=False)
-    chatbot = gr.Chatbot(elem_id="chatbot", show_label=False)
+    chatbot = gr.Chatbot(elem_id="chatbot", show_label=False, show_copy_button=True)
     
     with gr.Row():
-        inputs = gr.Textbox(placeholder= "Input", show_label=False, lines=2, scale=9)
-        b1 = gr.Button(scale=1, value="Send", variant="primary")
+        inputs = gr.Textbox(placeholder= "Input", show_label=False, lines=2, scale=8)
+        clean_btn = gr.Button(scale=1, value="Clean", variant="stop")
+        send_btn = gr.Button(scale=1, value="Send", variant="primary")
     
     with gr.Accordion("Parameters", open=False):
-        with gr.Row():
-            top_p = gr.Slider( minimum=-0, maximum=1.0, value=1.0, step=0.05, interactive=True, label="Top-p (nucleus sampling)",)
-            temperature = gr.Slider( minimum=-0, maximum=5.0, value=1.0, step=0.1, interactive=True, label="Temperature",)
-        with gr.Row():
-            top_k = gr.Slider( minimum=1, maximum=50, value=4, step=1, interactive=True, label="Top-k",)
-            repetition_penalty = gr.Slider( minimum=0.1, maximum=3.0, value=1.03, step=0.01, interactive=True, label="Repetition Penalty", )
+        if args.llm_engine == "openai" or args.llm_engine is None:
+            parameters = OPENAI_PARAMEATERS
+        elif args.llm_engine == "huggingface":
+            parameters = HF_PARAMETERS
+        
+        availabel_components = []
+        parameter_components = []
+        index = 0
+        while index < len(parameters):
+            with gr.Row():
+                with gr.Column():
+                    parameter_components.append(create_component(*parameters[index]))
+                    availabel_components.append(gr.Checkbox(label="Disable", value=True, interactive=True))
+                    index += 1
+                if index < len(parameters):
+                    with gr.Column():
+                        parameter_components.append(create_component(*parameters[index]))
+                        availabel_components.append(gr.Checkbox(label="Disable", value=True, interactive=True))
+                        index += 1
     
-    inputs.submit(respond, [inputs, chatbot, system_prompt], [inputs, chatbot])
+    inputs.submit(respond, [inputs, chatbot, system_prompt, stream_component, *(parameter_components+availabel_components)], [inputs, chatbot])
+    send_btn.click(respond, [inputs, chatbot, system_prompt, stream_component, *(parameter_components+availabel_components)], [inputs, chatbot])
+    clean_btn.click(clean_conversation, outputs=[inputs, chatbot])
+    
+    for parameter_component, availabel_component in zip(parameter_components, availabel_components):
+        parameter_component.change(
+            fn=enable_parameter_slider,
+            outputs=availabel_component
+        )
  
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7861)
+    demo.launch(server_name=args.address, server_port=args.port)
