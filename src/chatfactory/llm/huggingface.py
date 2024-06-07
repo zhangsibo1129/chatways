@@ -42,7 +42,7 @@ class HFChatModel(BaseChatModel):
         generation_config.update(
             dict(
                 do_sample = True,
-                max_length = 100,
+                max_length = self.tokenizer.model_max_length
             )
         )
         return generation_config

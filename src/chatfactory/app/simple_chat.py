@@ -85,7 +85,6 @@ def get_generation_config(components):
     return generation_config
 
 def respond(message, history, system_prompt, stream, *components):
-    history.append([message, ""])
     generation_config = get_generation_config(components)
     response = bot.chat(
         message=message,
@@ -94,6 +93,7 @@ def respond(message, history, system_prompt, stream, *components):
         generation_config=generation_config,
         stream=stream
     )
+    history.append([message, ""])
     if stream:
         for chunk in response:
             if chunk is not None:
