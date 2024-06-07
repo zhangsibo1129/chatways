@@ -14,7 +14,7 @@ class HFChatModel(BaseChatModel):
     Huggingface Chat Completions
     """
     
-    default_model: str = "01-ai/Yi-1.5-6B-Chat"
+    default_model: str = "Qwen/Qwen1.5-4B-Chat"
     model: str = ""
         
     def setup_model(self, model: Optional[str] = None, model_config: Optional[dict] = None) -> None:
