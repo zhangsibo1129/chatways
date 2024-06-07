@@ -1,3 +1,6 @@
 gradio
 transformers
 openai
+sentencepiece
+protobuf
+accelerate

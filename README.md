@@ -41,7 +41,7 @@ You can quickly start a chat application with the following one-line command, wi
 
 ### Launch a template application
 
-- launch a chat application with a openai backend:
+- launch a chat application with openai backend:
 
     ```bash
     export OPENAI_API_KEY="openai_api_key"
@@ -58,7 +58,7 @@ You can quickly start a chat application with the following one-line command, wi
         --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
     ```
 
-- launch a chat application with huggingface backend and a specific model:
+- launch a chat application with huggingface backend:
 
     ```bash
     python src/chatfactory/app/simple_chat.py \
