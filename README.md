@@ -67,7 +67,49 @@ You can quickly start a chat application with the following one-line command, wi
         --llm-model-config '{"torch_dtype":"auto","device_map":"auto"}'
     ```
 
-### Customize application with bot moudle
+### Use bot moudle
+
+The `bot` module provides a highly abstract interface designed to simplify integration. This module allows developers to seamlessly integrate llm into their workflow.
+
+1. Model Configuration
+
+    ```python
+    import os
+    os.environ['OPENAI_API_KEY'] = "openai_api_key"
+    os.environ['OPENAI_BASE_URL'] = "openai_base_url"
+
+    llm_config = dict(
+        engine = "huggingface",
+        model = "gpt-3.5-turbo-16k-0613",
+    )
+    ```
+
+2. Create a chatbot instance
+
+    ```python
+    from chatfactory.bot.chat import SimpleChatBot
+
+    bot = SimpleChatBot(llm_config)
+    ```
+
+3. Chat with the bot
+
+    ```python
+    history = []
+    query = "Say three positive words"
+    response = bot.chat(query, history=history, stream=False)
+    print(response)
+    # Output:
+    # Love, happiness, success
+
+    history.append([query, response]) # Maintain Conversation History
+
+    query = "Please use the second one in a sentence"
+    response = bot.chat(query, history=history, stream=False)
+    print(response)
+    # Output:
+    # Her infectious laughter filled the room with happiness.
+    ```
 
 ## Contributing
 
