@@ -1,10 +1,15 @@
 # chatfactory
 
+<p align="center">
+    <b>English</b> |
+    <a href="https://github.com/zhangsibo1129/chatfactory/blob/main/README_zh.md">中文</a>
+<p>
+
 Chatfactory provides an easy way to build chat applications with LLMs, offering templates, interfaces, and support for multiple llm backends.
 
 ## Features
 
-- Template-driven application creation for non-coders, enabling app development with just one command.
+- [Template-driven](#application-templates) application creation for non-coders, enabling app development with just one command.
 - Simplified API interface for developers, eliminating complex development workflows.
 - Integration with multiple LLM backends, including OpenAI and Hugging Face.
 
@@ -35,7 +40,7 @@ You can quickly start a chat application with the following one-line command, wi
 
 2. Open your browser and visit `http://localhost:7860` to interact with the chat application.
 
-    ![chatfactory-demo](chat_demo.png)
+    ![chatfactory-demo](docs/figures/simple_chat.png)
 
 ## How to use
 
@@ -63,7 +68,7 @@ You can quickly start a chat application with the following one-line command, wi
     ```bash
     python src/chatfactory/app/simple_chat.py \
         --llm-engine huggingface \
-        --llm-model 01-ai/Yi-1.5-6B-Chat \
+        --llm-model Qwen/Qwen1.5-4B-Chat \
         --llm-model-config '{"torch_dtype":"auto","device_map":"auto"}'
     ```
 
@@ -110,6 +115,16 @@ The `bot` module provides a highly abstract interface designed to simplify integ
     # Output:
     # Her infectious laughter filled the room with happiness.
     ```
+
+## Application Templates
+
+Currently, Chatfactory provides the following application templates:
+
+| Name | Function | Launch Command | Parameters (Optional) |
+|:----------:|----------|----------|----------|
+| [**Chat**](docs/simple_chat.md) | Simple chat application that enables multi-round conversations with LLM | python simple_chat.py | `--address`<br>`--port`<br>`--llm-engine` <br>`--llm-model` <br>`--llm-model-config`|
+| [**Chat Comparison**](docs/chat_comparison.md) | Chat with 2 LLMs simultaneously and compare their results | python chat_comparison.py | `--address`<br>`--port`<br>`--llm-engine1` <br>`--llm-model1` <br>`--llm-model-config1` <br>`--llm-engine2` <br>`--llm-model2` <br>`--llm-model-config2`|
+
 
 ## Contributing
 
