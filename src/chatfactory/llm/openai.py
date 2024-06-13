@@ -33,9 +33,10 @@ class OpenAIChatModel(BaseChatModel):
 
     def _generator_filter(self, response):
         for chunk in response:
-            content = chunk.choices[0].delta.content
-            if content is not None:
-                yield content
+            if len(chunk.choices) > 0:
+                content = chunk.choices[0].delta.content
+                if content is not None:
+                    yield content
 
     def invoke(self, messages: Any, generation_config: Optional[dict] = None) -> Any:
         if generation_config is None:
