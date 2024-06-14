@@ -164,19 +164,11 @@ class ArxivChatBot:
         if not papers:
             return message
         papers = json.loads(papers)
-        print("=================")
-        print(papers)
-        # for paper in papers:
-        #     #paper.pop("authors", None)
-        #     paper.pop("summary", None)
-        #     paper.pop("pdf_url", None)
-        # papers = json.dumps(papers)
         content = ""
         for paper in papers:
             content += "题目：{title}\n".format(title=paper["title"])
             content += "作者：{authors}\n\n".format(authors=", ".join(paper["authors"]))
         
         message = ARXIV_CHAT_TEMPLATE.format(content=content, message=message)
-        print(message)
         return message
         

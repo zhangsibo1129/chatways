@@ -59,7 +59,6 @@ class ArxivTool(BaseTool):
         
         client = arxiv.Client()
         max_results = kwargs.get("max_results", 5)
-        print(query)
         search = arxiv.Search(
             query = query,
             max_results = max_results,
