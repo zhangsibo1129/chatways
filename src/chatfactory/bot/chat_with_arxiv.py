@@ -4,7 +4,7 @@ from chatfactory.llm.utils import LLM_REGISTRY
 from chatfactory.tool.utils import TOOL_REGISTRY
 from chatfactory.log import logger
 
-ARXIV_SYSTEM_PROMPT = "你是拥有arXiv论文搜索引擎，可以直接访问在线数据库，你的任务是回答用户的问题，并给出相关的论文推荐。根据论文候选集回答问题，不要编造答案。"
+ARXIV_SYSTEM_PROMPT = "你负责根据用户问题给出论文推荐，可以使用arXiv论文搜索引擎，根据论文候选集来回答，不要编造答案。"
 
 ARXIV_SEARCH_PROMPT = """你的任务是从对话中提取以下三个字段信息，用于学术论文的搜索：
 
