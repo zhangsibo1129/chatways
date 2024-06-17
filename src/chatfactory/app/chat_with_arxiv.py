@@ -28,8 +28,8 @@ CSS = """#chatbot {
 
 HEADER = (
     "# Chat with arXiv\n\n"
-    "Chat with arXiv uses LLM to make finding academic papers on arXiv feel more natural and "
-    "intuitive. Easily discover the most relevant research with user-friendly search features.\n"
+    "Chat with arXiv uses LLM to make finding academic papers on arXiv more natural and insightful. "
+    "Easily discover the most relevant studies with user-friendly search functionality."
 )
 
 OPENAI_PARAMEATERS = [
