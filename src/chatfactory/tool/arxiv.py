@@ -1,3 +1,4 @@
+import re
 import json
 import arxiv
 from typing import Optional, Tuple
@@ -11,8 +12,10 @@ class ArxivTool(BaseTool):
     
     @classmethod
     def construct_query(self, parameters_json: str) -> Tuple[str, Optional[arxiv.SortCriterion]]:
-        # in case of """json {...}""" markdown code block
-        parameters_json = parameters_json.replace("json\n", "\n")
+        # in case of the """json {...}""" markdown code block style
+        match = re.search(r'```json(.*?)```', parameters_json, re.DOTALL)
+        if match:
+            parameters_json = match.group(1).strip()
         try:
             parameters = json.loads(parameters_json)
         except json.JSONDecodeError:
