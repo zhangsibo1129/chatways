@@ -43,7 +43,7 @@ class ArxivTool(BaseTool):
         # refer to arXiv api documentation
         query = ""
         if keywords:
-            query += "abs:"
+            query += "all:"
             for keyword in keywords:
                 query += keyword + " "
         if authors:

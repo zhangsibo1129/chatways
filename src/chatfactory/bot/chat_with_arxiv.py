@@ -140,7 +140,8 @@ class ArxivChatBot:
         content = ""
         for paper in papers:
             content += "题目：{title}\n".format(title=paper["title"])
-            content += "作者：{authors}\n\n".format(authors=", ".join(paper["authors"]))
+            content += "作者：{authors}\n".format(authors=", ".join(paper["authors"]))
+            content += "摘要：{abstract}\n\n".format(abstract=paper["summary"])
         
         message = ARXIV_CHAT_TEMPLATE.format(content=content, message=message)
         return message
