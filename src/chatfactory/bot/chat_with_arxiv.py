@@ -4,64 +4,37 @@ from chatfactory.llm.utils import LLM_REGISTRY
 from chatfactory.tool.utils import TOOL_REGISTRY
 from chatfactory.log import logger
 
-ARXIV_SYSTEM_PROMPT = "你负责根据用户问题给出论文推荐，可以使用arXiv论文搜索引擎，根据论文候选集来回答，不要编造答案。"
+ARXIV_SYSTEM_PROMPT = "你擅长给用户推荐学术论文。"
 
-ARXIV_SEARCH_PROMPT = """你的任务是从对话中提取以下三个字段信息，用于学术论文的搜索：
+ARXIV_SEARCH_PROMPT = """任务
+根据用户问题提取关键信息，用于论文搜索。
 
-1. research_field：论文的研究主题或领域。以字符串列表形式表示，例如 ["machine learning", "medical image analysis"]。
-2. authors：论文作者。以字符串列表形式表示，例如 ["John Doe", "Jane Smith"]。
-3. search_order：检索方法，只能取值为 "Latest" 或 "Relevance"。其中：
-    - "Latest" 表示按最新排序。
-    - "Relevance" 表示按相关度排序。
+输入
+用户问题或陈述（字符串）。
 
-注意事项：
-
-- 专注于提取信息，不要直接回答对话中的问题。
-- 确保提取的字段内容为英文。
-- 信息缺失时字段可以为空。
-
-输出格式：
-
-请按照以下JSON格式输出提取的信息：
-
+输出
+JSON格式，包含以下字段：
 {
-  "research_field": ["example field"],
-  "authors": ["example author"],
-  "search_order": "Relevance"
+    "research_field": ["<topic1>", "<topic2>"],
+    "authors": ["<author1>", "<author2>"],
+    "search_order": "<sort type>"
 }
 
-示例：
-
-输入对话：
-User: I'm looking for the latest papers in machine learning and data mining. Can you also find papers by Andrew Ng?
-
-输出：
-{
-  "research_field": ["machine learning", "data mining"],
-  "authors": ["Andrew Ng"],
-  "search_order": "Latest"
-}
-
-输入对话：
-User: Could you find relevant papers by Jane Smith on natural language processing?
-
-输出：
-{
-  "research_field": ["natural language processing"],
-  "authors": ["Jane Smith"],
-  "search_order": "Relevance"
-}
-
+字段说明
+research_field：英文研究主题（必须为英文），可以为空。
+authors：英文论文作者（必须为英文），可以为空。
+search_order：检索方法，值为 "Latest"（按最新排序）或 "Relevance"（按相关度排序）。
 """
 
-ARXIV_CHAT_TEMPLATE = """论文候选集：
+ARXIV_CHAT_TEMPLATE = """请根据arXiv论文候选集来回答问题，不要编造，若arXiv论文候选集为空，提醒我检查arXiv服务是否可用。
+
+arXiv论文候选集：
 
 {content}
 
 问题：
 
 {message}
-
 """
 
 PAPER_CARD_TEMPLATE = """
