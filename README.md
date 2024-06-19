@@ -124,7 +124,7 @@ Currently, Chatfactory provides the following application templates:
 |:----------:|----------|----------|----------|
 | [**Chat**](docs/simple_chat.md) | Simple chat application that enables multi-round conversations with LLM | python simple_chat.py | `--address`<br>`--port`<br>`--llm-engine` <br>`--llm-model` <br>`--llm-model-config`|
 | [**Chat Comparison**](docs/chat_comparison.md) | Chat with 2 LLMs simultaneously and compare their results | python chat_comparison.py | `--address`<br>`--port`<br>`--llm-engine1` <br>`--llm-model1` <br>`--llm-model-config1` <br>`--llm-engine2` <br>`--llm-model2` <br>`--llm-model-config2`|
-
+| [**Chat with arXiv**](docs/chat_with_arxiv.md) | Using LLM to make finding academic papers on arXiv more natural and insightful | python chat_with_arxiv.py | `--address`<br>`--port`<br>`--llm-engine` <br>`--llm-model` <br>`--llm-model-config`|
 
 ## Contributing
 
