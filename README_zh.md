@@ -126,6 +126,7 @@ Chatfactory 提供了高度抽象的 `bot` 模块，该模块允许开发者调�
 |:----------:|----------|----------|----------|
 | [**Chat**](docs/simple_chat.md) | 简单的聊天应用，实现与 LLM 的多轮对话 | python simple_chat.py | `--address`<br>`--port`<br>`--llm-engine` <br>`--llm-model` <br>`--llm-model-config`|
 | [**Chat Comparison**](docs/chat_comparison.md) | 同时与2个LLM进行对话，对二者的结果进行对照 | python chat_comparison.py | `--address`<br>`--port`<br>`--llm-engine1` <br>`--llm-model1` <br>`--llm-model-config1` <br>`--llm-engine2` <br>`--llm-model2` <br>`--llm-model-config2`|
+| [**Chat**](docs/chat_with_arxiv.md) | 在 arXiv 上更加智能、人性化地搜索学术论文 | python chat_with_arXiv.py | `--address`<br>`--port`<br>`--llm-engine` <br>`--llm-model` <br>`--llm-model-config`|
 
 ## 贡献
 
