@@ -1,4 +1,3 @@
-from typing import Optional, Dict, List, Any
 from abc import ABC, abstractmethod
 
 
@@ -9,7 +8,7 @@ TOOL_REGISTRY_MAP = {
 
 def import_from_register(key):
     value = TOOL_REGISTRY_MAP[key]
-    exec(f'from chatfactory.tool.{key} import {value}')
+    exec(f"from chatfactory.tool.{key} import {value}")
 
 
 class ToolRegistry(dict):
@@ -17,7 +16,7 @@ class ToolRegistry(dict):
         try:
             import_from_register(key)
         except Exception as e:
-            print(f'import {key} failed, details: {e}')
+            print(f"import {key} failed, details: {e}")
 
     def __getitem__(self, key):
         if key not in self.keys():
@@ -36,6 +35,7 @@ def register_tool(name):
     def decorator(cls):
         TOOL_REGISTRY[name] = cls
         return cls
+
     return decorator
 
 
