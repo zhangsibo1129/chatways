@@ -75,7 +75,7 @@ class ArxivChatBot:
         model: Optional[str] = None,
         model_config: Optional[dict] = None,
     ) -> None:
-        logger.info(f"Setting up LLM...")
+        logger.info("Setting up LLM...")
         if llm_engine is None:
             llm_engine = "openai"
         llm_cls = LLM_REGISTRY[llm_engine]
@@ -83,7 +83,7 @@ class ArxivChatBot:
         logger.info(f"LLM Engine: {llm_engine}")
         logger.info(f"Model ID/Path: {self.llm.model}")
         logger.info(f"Model Config: {model_config}")
-        logger.info(f"LLM has been initialized.")
+        logger.info("LLM has been initialized.")
 
     def _search_from_arxiv(
         self,

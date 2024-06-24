@@ -1,15 +1,14 @@
 import os
 import sys
+import json
+import argparse
+import gradio as gr
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 lib_dir = os.path.dirname(os.path.dirname(current_dir))
 sys.path.append(lib_dir)
 
-import json
-import argparse
-import gradio as gr
-
-from chatfactory.bot.chat_with_arxiv import ArxivChatBot, ARXIV_SYSTEM_PROMPT
+from chatfactory.bot.chat_with_arxiv import ArxivChatBot, ARXIV_SYSTEM_PROMPT  # noqa: E402
 
 
 CSS = """#chatbot {
