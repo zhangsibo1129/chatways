@@ -16,7 +16,5 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.11
-      - name: Make lint script executable
-        run: chmod +x ci/lint.sh
       - name: Run lint script
         run: ci/lint.sh
