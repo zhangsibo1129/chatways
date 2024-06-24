@@ -80,9 +80,9 @@ bot = SimpleChatBot(
     llm_config={
         "engine": args.llm_engine,
         "model": args.llm_model,
-        "model_config": json.loads(args.llm_model_config)
-        if args.llm_model_config
-        else None,
+        "model_config": (
+            json.loads(args.llm_model_config) if args.llm_model_config else None
+        ),
     }
 )
 

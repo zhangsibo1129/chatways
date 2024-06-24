@@ -110,9 +110,9 @@ bot1 = SimpleChatBot(
     llm_config={
         "engine": args.llm_engine1,
         "model": args.llm_model1,
-        "model_config": json.loads(args.llm_model_config1)
-        if args.llm_model_config1
-        else None,
+        "model_config": (
+            json.loads(args.llm_model_config1) if args.llm_model_config1 else None
+        ),
     }
 )
 
@@ -120,9 +120,9 @@ bot2 = SimpleChatBot(
     llm_config={
         "engine": args.llm_engine2,
         "model": args.llm_model2,
-        "model_config": json.loads(args.llm_model_config2)
-        if args.llm_model_config2
-        else None,
+        "model_config": (
+            json.loads(args.llm_model_config2) if args.llm_model_config2 else None
+        ),
     }
 )
 
