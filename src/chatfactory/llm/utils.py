@@ -1,5 +1,6 @@
 from typing import Optional, Dict, List, Any
 from abc import ABC, abstractmethod
+from chatfactory.registry import Registry
 
 
 LLM_REGISTRY_MAP = {
@@ -8,30 +9,7 @@ LLM_REGISTRY_MAP = {
     "fake": "FakeChatModel",
 }
 
-
-def import_from_register(key):
-    value = LLM_REGISTRY_MAP[key]
-    exec(f"from chatfactory.llm.{key} import {value}")
-
-
-class LLMRegistry(dict):
-    def _import_key(self, key):
-        try:
-            import_from_register(key)
-        except Exception as e:
-            print(f"import {key} failed, details: {e}")
-
-    def __getitem__(self, key):
-        if key not in self.keys():
-            self._import_key(key)
-        return super().__getitem__(key)
-
-    def __contains__(self, key):
-        self._import_key(key)
-        return super().__contains__(key)
-
-
-LLM_REGISTRY = LLMRegistry()
+LLM_REGISTRY = Registry("llm", LLM_REGISTRY_MAP)
 
 
 def register_llm(name):

@@ -1,34 +1,11 @@
 from abc import ABC, abstractmethod
-
+from chatfactory.registry import Registry
 
 TOOL_REGISTRY_MAP = {
     "arxiv": "ArxivTool",
 }
 
-
-def import_from_register(key):
-    value = TOOL_REGISTRY_MAP[key]
-    exec(f"from chatfactory.tool.{key} import {value}")
-
-
-class ToolRegistry(dict):
-    def _import_key(self, key):
-        try:
-            import_from_register(key)
-        except Exception as e:
-            print(f"import {key} failed, details: {e}")
-
-    def __getitem__(self, key):
-        if key not in self.keys():
-            self._import_key(key)
-        return super().__getitem__(key)
-
-    def __contains__(self, key):
-        self._import_key(key)
-        return super().__contains__(key)
-
-
-TOOL_REGISTRY = ToolRegistry()
+TOOL_REGISTRY = Registry("tool", TOOL_REGISTRY_MAP)
 
 
 def register_tool(name):
