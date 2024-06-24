@@ -1,4 +1,3 @@
-
 import os
 
 from typing import Optional, Any
@@ -12,11 +11,13 @@ class OpenAIChatModel(BaseChatModel):
     """
     OpenAI Chat Completions
     """
-    
+
     default_model: str = "gpt-3.5-turbo"
     model: str = ""
-        
-    def setup_model(self, model: Optional[str] = None, model_config: Optional[dict] = None) -> None:
+
+    def setup_model(
+        self, model: Optional[str] = None, model_config: Optional[dict] = None
+    ) -> None:
         if model is None:
             self.model = self.default_model
         else:
@@ -44,22 +45,20 @@ class OpenAIChatModel(BaseChatModel):
 
         generation_config.update({"stream": False})
         response = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            **generation_config
+            model=self.model, messages=messages, **generation_config
         )
         response = response.choices[0].message.content
         return response
 
-    def invoke_stream(self, messages: Any, generation_config: Optional[dict] = None) -> Any:
+    def invoke_stream(
+        self, messages: Any, generation_config: Optional[dict] = None
+    ) -> Any:
         if generation_config is None:
             generation_config = {}
 
         generation_config.update({"stream": True})
         response = self.client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            **generation_config
+            model=self.model, messages=messages, **generation_config
         )
         response = self._generator_filter(response)
         return response
