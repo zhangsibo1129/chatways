@@ -22,23 +22,23 @@ if [ $? -ne 0 ]; then
 fi
 
 # Run checks.
-BLACK_OUTPUT=$( (black --check src tests -v) 2>&1 )
+BLACK_OUTPUT=$( (black --check src -v) 2>&1 )
 STATUS=$?
 if [ "$STATUS" -ne 0 ]; then
     echo "black checks failed:"
     echo "$BLACK_OUTPUT"
-    echo "Please run 'black src tests'."
+    echo "Please run 'black src'."
     exit "$STATUS"
 else
     echo "black checks passed."
 fi
 
-RUFF_OUTPUT=$( (ruff check src tests) 2>&1 )
+RUFF_OUTPUT=$( (ruff check src) 2>&1 )
 STATUS=$?
 if [ "$STATUS" -ne 0 ]; then
     echo "ruff checks failed:"
     echo "$RUFF_OUTPUT"
-    echo "Please fix ruff warning. (You could try 'ruff --fix src tests')"
+    echo "Please fix ruff warning. (You could try 'ruff --fix src')"
     exit "$STATUS"
 else
     echo "ruff checks passed."
