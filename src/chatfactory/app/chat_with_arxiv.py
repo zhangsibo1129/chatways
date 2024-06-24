@@ -8,7 +8,10 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 lib_dir = os.path.dirname(os.path.dirname(current_dir))
 sys.path.append(lib_dir)
 
-from chatfactory.bot.chat_with_arxiv import ArxivChatBot, ARXIV_SYSTEM_PROMPT  # noqa: E402
+from chatfactory.bot.chat_with_arxiv import (  # noqa: E402
+    ArxivChatBot,
+    ARXIV_SYSTEM_PROMPT,
+)
 
 
 CSS = """#chatbot {

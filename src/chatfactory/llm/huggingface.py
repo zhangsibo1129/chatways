@@ -1,4 +1,3 @@
-
 from threading import Thread
 from typing import Optional, Dict, List, Any
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
