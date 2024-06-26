@@ -11,10 +11,11 @@ class HFChatModel(BaseChatModel):
     Huggingface Chat Completions
     """
 
-    default_model: str = "Qwen/Qwen1.5-4B-Chat"
+    engine: str = "huggingface"
     model: str = ""
+    default_model: str = "Qwen/Qwen1.5-4B-Chat"
 
-    def setup_model(
+    def __init__(
         self, model: Optional[str] = None, model_config: Optional[dict] = None
     ) -> None:
         if model is None:
@@ -26,7 +27,7 @@ class HFChatModel(BaseChatModel):
         self.client = AutoModelForCausalLM.from_pretrained(self.model, **model_config)
         self.tokenizer = AutoTokenizer.from_pretrained(self.model)
 
-    def _prepare_inputs(self, messages: List[Dict]) -> Any:
+    def _prepare_inputs(self, messages: List[Dict]):
         raw_inputs = self.tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
         )
@@ -65,7 +66,7 @@ class HFChatModel(BaseChatModel):
 
     def invoke_stream(
         self, messages: List[Dict], generation_config: Optional[dict] = None
-    ) -> str:
+    ) -> Any:
         model_inputs = self._prepare_inputs(messages)
 
         if generation_config is None:
