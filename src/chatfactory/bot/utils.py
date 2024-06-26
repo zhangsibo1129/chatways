@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from chatfactory.llm.utils import LLM_REGISTRY
 from chatfactory.log import logger
 
+
 class BaseChatBot(ABC):
     def __init__(self, llm_config: Optional[dict] = None) -> None:
         llm_engine, model, model_config = self.parse_llm_config(llm_config)

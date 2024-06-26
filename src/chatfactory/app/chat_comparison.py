@@ -10,7 +10,7 @@ sys.path.append(lib_dir)
 
 from chatfactory.bot.simple_chat import SimpleChatBot  # noqa: E402
 
-
+# Step 1. Configuration
 CSS = """#chatbot1, #chatbot2 {
     height: 60vh !important;
     display: flex;
@@ -18,10 +18,11 @@ CSS = """#chatbot1, #chatbot2 {
 }
 """
 
-HEADER = """# Chat Comparison
-
-Chat Comparison lets you chat with two different language models simultaneously, so you can see how they answer the same question and identify the differences between them.
-"""
+HEADER = (
+    "# Chat Comparison\n\n"
+    "Chat Comparison lets you chat with two different language models simultaneously, so you can see how "
+    "they answer the same question and identify the differences between them."
+)
 
 OPENAI_PARAMEATERS = [
     ("temperature", 1.0, 0.0, 2.0, 0.01),
@@ -45,6 +46,7 @@ FAKE_PARAMETERS = [
 ]
 
 
+# Step 2. Argument Parsing
 def parse_args():
     parser = argparse.ArgumentParser(description="Simple Chat Application")
     parser.add_argument(
@@ -105,6 +107,7 @@ def parse_args():
 
 args = parse_args()
 
+# Step 3. Bot initialization
 bot1 = SimpleChatBot(
     llm_config={
         "engine": args.llm_engine1,
@@ -126,6 +129,7 @@ bot2 = SimpleChatBot(
 )
 
 
+# Step 4. Callbacks definition
 def get_generation_config1(components):
     if args.llm_engine1 == "openai" or args.llm_engine1 is None:
         parameters = OPENAI_PARAMEATERS
@@ -225,6 +229,7 @@ def enable_parameter_slider():
     return False
 
 
+# Step 5. Gradio Interface
 with gr.Blocks(css=CSS) as demo:
     gr.Markdown(HEADER)
 

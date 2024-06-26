@@ -10,7 +10,7 @@ sys.path.append(lib_dir)
 
 from chatfactory.bot.simple_chat import SimpleChatBot  # noqa: E402
 
-
+# Step 1. Configuration
 CSS = """#chatbot {
     height: 60vh !important;
     display: flex;
@@ -45,6 +45,7 @@ FAKE_PARAMETERS = [
 ]
 
 
+# Step 2. Argument Parsing
 def parse_args():
     parser = argparse.ArgumentParser(description="Simple Chat Application")
     parser.add_argument(
@@ -75,6 +76,7 @@ def parse_args():
 
 args = parse_args()
 
+# Step 3. Bot initialization
 bot = SimpleChatBot(
     llm_config={
         "engine": args.llm_engine,
@@ -86,6 +88,7 @@ bot = SimpleChatBot(
 )
 
 
+# Step 4. Callbacks definition
 def get_generation_config(components):
     if args.llm_engine == "openai" or args.llm_engine is None:
         parameters = OPENAI_PARAMEATERS
@@ -145,6 +148,7 @@ def enable_parameter_slider():
     return False
 
 
+# Step 5. Gradio Interface
 with gr.Blocks(css=CSS) as demo:
     gr.Markdown(HEADER)
 

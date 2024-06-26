@@ -4,6 +4,7 @@ from chatfactory.bot.utils import BaseChatBot
 
 class SimpleChatBot(BaseChatBot):
     """A simple chat bot that uses a single LLM."""
+
     def chat(
         self,
         message: str,
