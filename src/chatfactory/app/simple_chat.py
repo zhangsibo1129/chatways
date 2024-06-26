@@ -8,7 +8,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 lib_dir = os.path.dirname(os.path.dirname(current_dir))
 sys.path.append(lib_dir)
 
-from chatfactory.bot.chat import SimpleChatBot  # noqa: E402
+from chatfactory.bot.simple_chat import SimpleChatBot  # noqa: E402
 
 
 CSS = """#chatbot {

@@ -1,6 +1,4 @@
 from typing import Optional, Dict, List, Tuple, Any
-from chatfactory.llm.utils import LLM_REGISTRY
-from chatfactory.llm.llm import LLM
 from chatfactory.bot.utils import BaseChatBot
 
 
