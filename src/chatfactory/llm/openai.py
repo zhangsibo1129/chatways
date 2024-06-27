@@ -1,6 +1,6 @@
 import os
 
-from typing import Optional, Any
+from typing import Optional, Generator, Any
 from openai import OpenAI
 
 from chatfactory.llm.utils import BaseChatModel, register_llm
@@ -12,10 +12,11 @@ class OpenAIChatModel(BaseChatModel):
     OpenAI Chat Completions
     """
 
-    default_model: str = "gpt-3.5-turbo"
+    engine: str = "openai"
     model: str = ""
+    default_model: str = "gpt-3.5-turbo"
 
-    def setup_model(
+    def __init__(
         self, model: Optional[str] = None, model_config: Optional[dict] = None
     ) -> None:
         if model is None:
@@ -39,7 +40,7 @@ class OpenAIChatModel(BaseChatModel):
                 if content is not None:
                     yield content
 
-    def invoke(self, messages: Any, generation_config: Optional[dict] = None) -> Any:
+    def invoke(self, messages: Any, generation_config: Optional[dict] = None) -> str:
         if generation_config is None:
             generation_config = {}
 
@@ -52,7 +53,7 @@ class OpenAIChatModel(BaseChatModel):
 
     def invoke_stream(
         self, messages: Any, generation_config: Optional[dict] = None
-    ) -> Any:
+    ) -> Generator:
         if generation_config is None:
             generation_config = {}
 

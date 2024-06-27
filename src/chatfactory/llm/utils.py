@@ -1,4 +1,4 @@
-from typing import Optional, Dict, List, Any
+from typing import Optional, Dict, Any
 from abc import ABC, abstractmethod
 from chatfactory.registry import Registry
 
@@ -21,19 +21,22 @@ def register_llm(name):
 
 
 class BaseChatModel(ABC):
-    def __init__(
-        self, model: Optional[str] = None, model_config: Optional[Dict] = None
-    ) -> None:
-        self.setup_model(model, model_config)
+    engine: str = ""
+    model: str = ""
+    default_model: str = ""
 
     @abstractmethod
-    def setup_model(
+    def __init__(
         self, model: Optional[str] = None, model_config: Optional[Dict] = None
     ) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def invoke(
-        self, messages: List[Dict], generation_config: Optional[Dict] = None
+    def invoke(self, messages: Any, generation_config: Optional[Dict] = None) -> str:
+        raise NotImplementedError
+
+    @abstractmethod
+    def invoke_stream(
+        self, messages: Any, generation_config: Optional[Dict] = None
     ) -> Any:
         raise NotImplementedError
