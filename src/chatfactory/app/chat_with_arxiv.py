@@ -1,17 +1,8 @@
-import os
-import sys
 import json
 import argparse
 import gradio as gr
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-lib_dir = os.path.dirname(os.path.dirname(current_dir))
-sys.path.append(lib_dir)
-
-from chatfactory.bot.chat_with_arxiv import (  # noqa: E402
-    ArxivChatBot,
-    ARXIV_SYSTEM_PROMPT,
-)
+from chatfactory import ArxivChatBot, ARXIV_SYSTEM_PROMPT
 
 # Step 1. Configuration
 CSS = """#chatbot {
