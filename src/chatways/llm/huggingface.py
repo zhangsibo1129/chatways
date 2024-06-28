@@ -2,7 +2,7 @@ from threading import Thread
 from typing import Optional, Dict, List, Any
 from transformers import AutoModelForCausalLM, AutoTokenizer, TextIteratorStreamer
 
-from chatfactory.llm.utils import BaseChatModel, register_llm
+from chatways.llm.utils import BaseChatModel, register_llm
 
 
 @register_llm("huggingface")

@@ -1,11 +1,11 @@
-# chatfactory
+# Chatways
 
 <p align="center">
-    <a href="https://github.com/zhangsibo1129/chatfactory/blob/main/README.md">English</a> |
+    <a href="https://github.com/zhangsibo1129/chatways/blob/main/README.md">English</a> |
     <b>中文</b>
 <p>
 
-Chatfactory 用于快速构建基于 LLM 的聊天应用，它提供了多种拿来即用的应用模板，也提供抽象接口进行自定义开发，并支持多种 LLM 后端
+Chatways 用于快速构建基于 LLM 的聊天应用，它提供了多种拿来即用的应用模板，也提供抽象接口进行自定义开发，并支持多种 LLM 后端
 
 ## 特点
 
@@ -18,13 +18,13 @@ Chatfactory 用于快速构建基于 LLM 的聊天应用，它提供了多种拿
 1. 克隆仓库：
 
     ```bash
-    git clone https://github.com/zhangsibo1129/chatfactory.git
+    git clone https://github.com/zhangsibo1129/chatways.git
     ```
 
 2. 安装依赖：
 
     ```bash
-    cd chatfactory
+    cd chatways
     pip install -r requirements.txt
     ```
 
@@ -35,31 +35,31 @@ Chatfactory 用于快速构建基于 LLM 的聊天应用，它提供了多种拿
 1. 启动一个简单聊天应用，采用模拟 LLM 后端：
 
     ```bash
-    python src/chatfactory/app/simple_chat.py --llm-engine fake --port 7860
+    python src/chatways/app/simple_chat.py --llm-engine fake --port 7860
     ```
 
 2. 打开浏览器访问 `http://localhost:7860`，即可看到应用界面
 
-    ![chatfactory-demo](docs/figures/simple_chat.png)
+    ![chatways-demo](docs/figures/simple_chat.png)
 
 ## 使用教程
 
 ### 用模板创建应用
 
-Chatfactory 提供了多种模应用模板，以 Simple Chat 为例，你可以通过以下命令快速启动：
+Chatways 提供了多种模应用模板，以 Simple Chat 为例，你可以通过以下命令快速启动：
 
 - 采用 openai 后端，通过环境变量配置 `openai_api_key` 等信息:
 
     ```bash
     export OPENAI_API_KEY="openai_api_key"
     export OPENAI_BASE_URL="openai_base_url"
-    python src/chatfactory/app/simple_chat.py --llm-engine openai
+    python src/chatways/app/simple_chat.py --llm-engine openai
     ```
 
     或者，将 `openai_api_key` 作为模型参数传入：
 
     ```bash
-    python src/chatfactory/app/simple_chat.py \
+    python src/chatways/app/simple_chat.py \
         --llm-engine openai \
         --llm-model gpt-3.5-turbo \
         --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
@@ -68,7 +68,7 @@ Chatfactory 提供了多种模应用模板，以 Simple Chat 为例，你可以�
 - 采用 Huggingface 后端：
 
     ```bash
-    python src/chatfactory/app/simple_chat.py \
+    python src/chatways/app/simple_chat.py \
         --llm-engine huggingface \
         --llm-model Qwen/Qwen1.5-4B-Chat \
         --llm-model-config '{"torch_dtype":"auto","device_map":"auto"}'
@@ -76,7 +76,7 @@ Chatfactory 提供了多种模应用模板，以 Simple Chat 为例，你可以�
 
 ### 使用 bot 模块
 
-Chatfactory 提供了高度抽象的 `bot` 模块，该模块允许开发者调用简单接口，实现与自身业务的无缝集成。一般步骤如下：
+Chatways 提供了高度抽象的 `bot` 模块，该模块允许开发者调用简单接口，实现与自身业务的无缝集成。一般步骤如下：
 
 1. 模型配置
 
@@ -94,7 +94,7 @@ Chatfactory 提供了高度抽象的 `bot` 模块，该模块允许开发者调�
 2. 创建 bot 实例
 
     ```python
-    from chatfactory.bot.chat import SimpleChatBot
+    from chatways import SimpleChatBot
 
     bot = SimpleChatBot(llm_config)
     ```
@@ -120,7 +120,7 @@ Chatfactory 提供了高度抽象的 `bot` 模块，该模块允许开发者调�
 
 ## 应用模板
 
-目前 Chatfactory 提供了以下应用模板：
+目前 Chatways 提供了以下应用模板：
 
 | Name | 功能 | 启动命令 | 参数（可选）|
 |:----------:|----------|----------|----------|
@@ -130,7 +130,7 @@ Chatfactory 提供了高度抽象的 `bot` 模块，该模块允许开发者调�
 
 ## 贡献
 
-Chatfactory 项目目前在初期阶段，欢迎各种形式的贡献，包括但不限于：
+Chatways 项目目前在初期阶段，欢迎各种形式的贡献，包括但不限于：
 
 - 报告问题
 - 建议新功能

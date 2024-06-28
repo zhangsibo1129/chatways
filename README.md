@@ -1,11 +1,11 @@
-# chatfactory
+# Chatways
 
 <p align="center">
     <b>English</b> |
-    <a href="https://github.com/zhangsibo1129/chatfactory/blob/main/README_zh.md">中文</a>
+    <a href="https://github.com/zhangsibo1129/chatways/blob/main/README_zh.md">中文</a>
 <p>
 
-Chatfactory provides an easy way to build chat applications with LLMs, offering templates, interfaces, and support for multiple llm backends.
+Chatways provides an easy way to build chat applications with LLMs, offering templates, interfaces, and support for multiple llm backends.
 
 ## Features
 
@@ -18,13 +18,13 @@ Chatfactory provides an easy way to build chat applications with LLMs, offering 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/zhangsibo1129/chatfactory.git
+    git clone https://github.com/zhangsibo1129/chatways.git
     ```
 
 2. Install the required dependencies:
 
     ```bash
-    cd chatfactory
+    cd chatways
     pip install -r requirements.txt
     ```
 
@@ -35,12 +35,12 @@ You can quickly start a chat application with the following one-line command, wi
 1. launch the chat application:
 
     ```bash
-    python src/chatfactory/app/simple_chat.py --llm-engine fake --port 7860
+    python src/chatways/app/simple_chat.py --llm-engine fake --port 7860
     ```
 
 2. Open your browser and visit `http://localhost:7860` to interact with the chat application.
 
-    ![chatfactory-demo](docs/figures/simple_chat.png)
+    ![chatways-demo](docs/figures/simple_chat.png)
 
 ## How to use
 
@@ -51,13 +51,13 @@ You can quickly start a chat application with the following one-line command, wi
     ```bash
     export OPENAI_API_KEY="openai_api_key"
     export OPENAI_BASE_URL="openai_base_url"
-    python src/chatfactory/app/simple_chat.py --llm-engine openai
+    python src/chatways/app/simple_chat.py --llm-engine openai
     ```
 
     or
 
     ```bash
-    python src/chatfactory/app/simple_chat.py \
+    python src/chatways/app/simple_chat.py \
         --llm-engine openai \
         --llm-model gpt-3.5-turbo \
         --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
@@ -66,7 +66,7 @@ You can quickly start a chat application with the following one-line command, wi
 - launch a chat application with huggingface backend:
 
     ```bash
-    python src/chatfactory/app/simple_chat.py \
+    python src/chatways/app/simple_chat.py \
         --llm-engine huggingface \
         --llm-model Qwen/Qwen1.5-4B-Chat \
         --llm-model-config '{"torch_dtype":"auto","device_map":"auto"}'
@@ -92,7 +92,7 @@ The `bot` module provides a highly abstract interface designed to simplify integ
 2. Create a chatbot instance
 
     ```python
-    from chatfactory.bot.chat import SimpleChatBot
+    from chatways import SimpleChatBot
 
     bot = SimpleChatBot(llm_config)
     ```
@@ -118,7 +118,7 @@ The `bot` module provides a highly abstract interface designed to simplify integ
 
 ## Application Templates
 
-Currently, Chatfactory provides the following application templates:
+Currently, Chatways provides the following application templates:
 
 | Name | Function | Launch Command | Parameters (Optional) |
 |:----------:|----------|----------|----------|

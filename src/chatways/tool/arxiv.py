@@ -2,7 +2,7 @@ import re
 import json
 import arxiv
 from typing import Optional, Tuple
-from chatfactory.tool.utils import BaseTool, register_tool
+from chatways.tool.utils import BaseTool, register_tool
 
 
 @register_tool("arxiv")

@@ -2,7 +2,7 @@ import json
 import argparse
 import gradio as gr
 
-from chatfactory import SimpleChatBot
+from chatways import ArxivChatBot, ARXIV_SYSTEM_PROMPT
 
 # Step 1. Configuration
 CSS = """#chatbot {
@@ -10,12 +10,20 @@ CSS = """#chatbot {
     display: flex;
     flex-direction: column-reverse;
 }
+#max_papers {
+    height: 5vh !important;
+}
+.scrollable-markdown {
+    max-height: 55vh  !important; /* 设置最大高度 */
+    overflow-y: scroll; /* 启用垂直滚动条 */
+}
 """
 
-HEADER = """# Chat
-
-This is a simple chat application that uses a language model to generate responses.
-"""
+HEADER = (
+    "# Chat with arXiv\n\n"
+    "Chat with arXiv uses LLM to make finding academic papers on arXiv more natural and insightful. "
+    "Easily discover the most relevant studies with user-friendly search functionality."
+)
 
 OPENAI_PARAMEATERS = [
     ("temperature", 1.0, 0.0, 2.0, 0.01),
@@ -71,7 +79,7 @@ def parse_args():
 args = parse_args()
 
 # Step 3. Bot initialization
-bot = SimpleChatBot(
+bot = ArxivChatBot(
     llm_config={
         "engine": args.llm_engine,
         "model": args.llm_model,
@@ -103,28 +111,30 @@ def get_generation_config(components):
     return generation_config
 
 
-def respond(message, history, system_prompt, stream, *components):
+def respond(message, history_chat, history_search, max_papers, stream, *components):
     generation_config = get_generation_config(components)
-    response = bot.chat(
+    response, paper_cards, paper_search_query = bot.chat(
         message=message,
-        history=history,
-        system_prompt=system_prompt,
+        history_chat=history_chat,
+        history_search=history_search,
         generation_config=generation_config,
+        max_results=max_papers,
         stream=stream,
     )
-    history.append([message, ""])
+    history_search.append([message, paper_search_query])
+    history_chat.append([message, ""])
     if stream:
         for chunk in response:
             if chunk is not None:
-                history[-1][1] += chunk
-                yield "", history
+                history_chat[-1][1] += chunk
+                yield "", history_chat, history_search, paper_cards
     else:
-        history[-1][1] = response
-        yield "", history
+        history_chat[-1][1] = response
+        yield "", history_chat, history_search, paper_cards
 
 
 def clean_conversation():
-    return "", []
+    return "", [], []
 
 
 def create_component(label, value, minimum, maximum, step):
@@ -145,16 +155,36 @@ def enable_parameter_slider():
 # Step 5. Gradio Interface
 with gr.Blocks(css=CSS) as demo:
     gr.Markdown(HEADER)
+    history_search = gr.State([])
 
     with gr.Row():
         system_prompt = gr.Textbox(
-            placeholder="System Prompt", show_label=False, scale=9
+            placeholder=ARXIV_SYSTEM_PROMPT,
+            show_label=False,
+            interactive=False,
+            scale=9,
         )
         stream_component = gr.Checkbox(
             value=True, label="Stream", interactive=True, scale=1
         )
 
-    chatbot = gr.Chatbot(elem_id="chatbot", show_label=False, show_copy_button=True)
+    with gr.Row():
+        with gr.Column(scale=2):
+            chatbot = gr.Chatbot(
+                elem_id="chatbot", show_label=False, show_copy_button=True
+            )
+        with gr.Column(scale=1):
+            max_papers = gr.Slider(
+                elem_id="max_papers",
+                label="Paper Candidates",
+                value=5,
+                minimum=1,
+                maximum=50,
+                step=1,
+            )
+            paper_cards = gr.Markdown(
+                visible=True, elem_classes=["scrollable-markdown"]
+            )
 
     with gr.Row():
         inputs = gr.Textbox(placeholder="Input", show_label=False, lines=2, scale=8)
@@ -195,24 +225,26 @@ with gr.Blocks(css=CSS) as demo:
         [
             inputs,
             chatbot,
-            system_prompt,
+            history_search,
+            max_papers,
             stream_component,
             *(parameter_components + availabel_components),
         ],
-        [inputs, chatbot],
+        [inputs, chatbot, history_search, paper_cards],
     )
     send_btn.click(
         respond,
         [
             inputs,
             chatbot,
-            system_prompt,
+            history_search,
+            max_papers,
             stream_component,
             *(parameter_components + availabel_components),
         ],
-        [inputs, chatbot],
+        [inputs, chatbot, history_search, paper_cards],
     )
-    clean_btn.click(clean_conversation, outputs=[inputs, chatbot])
+    clean_btn.click(clean_conversation, outputs=[inputs, chatbot, history_search])
 
     for parameter_component, availabel_component in zip(
         parameter_components, availabel_components

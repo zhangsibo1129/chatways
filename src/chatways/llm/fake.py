@@ -2,7 +2,7 @@ import time
 import random
 from typing import Optional, Any
 
-from chatfactory.llm.utils import BaseChatModel, register_llm
+from chatways.llm.utils import BaseChatModel, register_llm
 
 
 @register_llm("fake")

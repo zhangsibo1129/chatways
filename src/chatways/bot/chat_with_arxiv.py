@@ -1,7 +1,7 @@
 import json
 from typing import Optional, Dict, List, Tuple, Any
-from chatfactory.bot.utils import BaseChatBot
-from chatfactory.tool.utils import TOOL_REGISTRY
+from chatways.bot.utils import BaseChatBot
+from chatways.tool.utils import TOOL_REGISTRY
 
 ARXIV_SYSTEM_PROMPT = "你擅长给用户推荐学术论文。"
 
