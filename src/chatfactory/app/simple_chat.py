@@ -1,14 +1,8 @@
-import os
-import sys
 import json
 import argparse
 import gradio as gr
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-lib_dir = os.path.dirname(os.path.dirname(current_dir))
-sys.path.append(lib_dir)
-
-from chatfactory.bot.simple_chat import SimpleChatBot  # noqa: E402
+from chatfactory import SimpleChatBot
 
 # Step 1. Configuration
 CSS = """#chatbot {

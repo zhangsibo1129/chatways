@@ -19,7 +19,6 @@ def generate_command(args, filename):
 def run_simple_template(args):
     filename = "simple_chat.py"
     command = generate_command(args, filename)
-    print(command)
     os.system(command)
 
 
