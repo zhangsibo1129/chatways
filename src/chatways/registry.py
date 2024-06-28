@@ -6,7 +6,7 @@ class Registry(dict):
 
     def _import_from_register(self, key):
         value = self.registry_map[key]
-        exec(f"from chatfactory.{self.module_name}.{key} import {value}")
+        exec(f"from chatways.{self.module_name}.{key} import {value}")
 
     def _import_key(self, key):
         try:

@@ -1,6 +1,6 @@
 from typing import Optional, Dict, Any
 from abc import ABC, abstractmethod
-from chatfactory.registry import Registry
+from chatways.registry import Registry
 
 
 LLM_REGISTRY_MAP = {

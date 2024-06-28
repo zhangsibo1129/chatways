@@ -1,5 +1,5 @@
 from typing import Optional, Dict, List, Tuple, Any
-from chatfactory.bot.utils import BaseChatBot
+from chatways.bot.utils import BaseChatBot
 
 
 class SimpleChatBot(BaseChatBot):

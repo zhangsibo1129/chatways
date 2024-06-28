@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from chatfactory.registry import Registry
+from chatways.registry import Registry
 
 TOOL_REGISTRY_MAP = {
     "arxiv": "ArxivTool",

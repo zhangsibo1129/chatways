@@ -1,26 +1,31 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='chatf',
-    version='0.1.0',
-    package_dir={'': 'src'},
+    name="chatways",
+    version="0.1.0-dev0",
+    package_dir={"": "src"},
     packages=find_packages("src"),
     install_requires=[
+        "gradio",
+        "transformers",
+        "openai",
+        "sentencepiece",
+        "protobuf",
+        "accelerate",
     ],
     entry_points={
-        'console_scripts': [
-            'chatf=chatfactory.cli:main',
+        "console_scripts": [
+            "chatways=chatways.cli:main",
         ],
     },
-    author='Your Name',
-    author_email='your_email@example.com',
-    description='A command line tool for chat project',
-    long_description_content_type='text/markdown',
-    url='https://github.com/your_username/chat',
+    author="Sibo Zhang",
+    author_email="zhangsibo1129@gmail.com",
+    description="A command line tool for chatways",
+    url="https://github.com/zhangsibo1129/chatways",
     classifiers=[
-        'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: MIT License',
-        'Operating System :: OS Independent',
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
     ],
-    python_requires='>=3.8',
+    python_requires=">=3.8",
 )

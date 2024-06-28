@@ -2,7 +2,7 @@ import json
 import argparse
 import gradio as gr
 
-from chatfactory import SimpleChatBot
+from chatways import SimpleChatBot
 
 # Step 1. Configuration
 CSS = """#chatbot1, #chatbot2 {

@@ -1,7 +1,7 @@
 from typing import Optional, Tuple, Any
 from abc import ABC, abstractmethod
-from chatfactory.llm.utils import LLM_REGISTRY
-from chatfactory.log import logger
+from chatways.llm.utils import LLM_REGISTRY
+from chatways.log import logger
 
 
 class BaseChatBot(ABC):

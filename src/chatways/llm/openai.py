@@ -3,7 +3,7 @@ import os
 from typing import Optional, Generator, Any
 from openai import OpenAI
 
-from chatfactory.llm.utils import BaseChatModel, register_llm
+from chatways.llm.utils import BaseChatModel, register_llm
 
 
 @register_llm("openai")
