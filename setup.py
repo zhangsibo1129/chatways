@@ -2,9 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name="chatways",
-    version="0.1.0-dev0",
+    version="0.1.0-dev2",
     package_dir={"": "src"},
     packages=find_packages("src"),
+    include_package_data=True,
     install_requires=[
         "gradio",
         "transformers",
@@ -20,7 +21,7 @@ setup(
     },
     author="Sibo Zhang",
     author_email="zhangsibo1129@gmail.com",
-    description="A command line tool for chatways",
+    description="Chatways",
     url="https://github.com/zhangsibo1129/chatways",
     classifiers=[
         "Programming Language :: Python :: 3",
