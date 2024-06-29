@@ -1,0 +1,1 @@
+recursive-include chatways/template *.py

@@ -4,7 +4,7 @@ import argparse
 
 def generate_command(args, filename):
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(current_dir, "app", filename)
+    file_path = os.path.join(current_dir, "template", filename)
     arguments = " "
     for key, value in vars(args).items():
         if not value:
