@@ -16,26 +16,26 @@ chatways simple [options]
 
 - **Case 1** Use Default Parameters
 
-```bash
-chatways simple
-```
+  ```bash
+  chatways simple
+  ```
 
 - **Case 2** Config with Full Parameters
 
-```bash
-chatways simple \
-    --llm-engine openai \
-    --llm-model gpt-3.5-turbo \
-    --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
-```
+  ```bash
+  chatways simple \
+      --llm-engine openai \
+      --llm-model gpt-3.5-turbo \
+      --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
+  ```
 
 - **Case 3** Set Partial Parameters with Abbreviations
 
-```bash
-chatways simple \
-    -le huggingface \
-    -lc '{"torch_dtype":"auto","device_map":"auto"}'
-```
+  ```bash
+  chatways simple \
+      -le huggingface \
+      -lc '{"torch_dtype":"auto","device_map":"auto"}'
+  ```
 
 ## Configuration
 

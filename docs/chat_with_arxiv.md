@@ -16,26 +16,26 @@ chatways arxiv [options]
 
 - **Case 1** Use Default Parameters
 
-```bash
-chatways arxiv
-```
+  ```bash
+  chatways arxiv
+  ```
 
 - **Case 2** Config with Full Parameters
 
-```bash
-chatways arxiv \
-    --llm-engine openai \
-    --llm-model gpt-3.5-turbo \
-    --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
-```
+  ```bash
+  chatways arxiv \
+      --llm-engine openai \
+      --llm-model gpt-3.5-turbo \
+      --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
+  ```
 
 - **Case 3** Set Partial Parameters with Abbreviations
 
-```bash
-chatways arxiv \
-    -le huggingface \
-    -lc '{"torch_dtype":"auto","device_map":"auto"}'
-```
+  ```bash
+  chatways arxiv \
+      -le huggingface \
+      -lc '{"torch_dtype":"auto","device_map":"auto"}'
+  ```
 
 ## Configuration
 

@@ -16,30 +16,30 @@ chatways comparison [options]
 
 - **样例1** 使用默认参数
 
-```bash
-chatways comparison
-```
+  ```bash
+  chatways comparison
+  ```
 
 - **样例2** 设置完整参数
 
-```bash
-chatways comparison \
-    --llm-engine1 openai \
-    --llm-model1 gpt-3.5-turbo \
-    --llm-model-config1 '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
-    --llm-engine2 huggingface \
-    --llm-model2 Qwen/Qwen1.5-4B-Chat \
-    --llm-model-config2 '{"torch_dtype":"auto","device_map":"auto"}'
-```
+  ```bash
+  chatways comparison \
+      --llm-engine1 openai \
+      --llm-model1 gpt-3.5-turbo \
+      --llm-model-config1 '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
+      --llm-engine2 huggingface \
+      --llm-model2 Qwen/Qwen1.5-4B-Chat \
+      --llm-model-config2 '{"torch_dtype":"auto","device_map":"auto"}'
+  ```
 
 - **样例3** 用简称指定部分参数
 
-```bash
-chatways comparison \
-    --le1 openai \
-    --le2 huggingface \
-    --lc2 '{"torch_dtype":"auto","device_map":"auto"}'
-```
+  ```bash
+  chatways comparison \
+      --le1 openai \
+      --le2 huggingface \
+      --lc2 '{"torch_dtype":"auto","device_map":"auto"}'
+  ```
 
 ## 配置参数
 

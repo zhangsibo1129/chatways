@@ -16,26 +16,26 @@ chatways simple [options]
 
 - **样例1** 使用默认参数
 
-```bash
-chatways simple
-```
+  ```bash
+  chatways simple
+  ```
 
 - **样例2** 设置完整参数
 
-```bash
-chatways simple \
-    --llm-engine openai \
-    --llm-model gpt-3.5-turbo \
-    --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
-```
+  ```bash
+  chatways simple \
+      --llm-engine openai \
+      --llm-model gpt-3.5-turbo \
+      --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
+  ```
 
 - **样例3** 用简称指定部分参数
 
-```bash
-chatways simple \
-    -le huggingface \
-    -lc '{"torch_dtype":"auto","device_map":"auto"}'
-```
+  ```bash
+  chatways simple \
+      -le huggingface \
+      -lc '{"torch_dtype":"auto","device_map":"auto"}'
+  ```
 
 ## 配置参数
 

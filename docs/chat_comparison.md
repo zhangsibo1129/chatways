@@ -16,30 +16,30 @@ chatways comparison [options]
 
 - **Case 1** Use Default Parameters
 
-```bash
-chatways comparison
-```
+  ```bash
+  chatways comparison
+  ```
 
 - **Case 2** Config with Full Parameters
 
-```bash
-chatways comparison \
-    --llm-engine1 openai \
-    --llm-model1 gpt-3.5-turbo \
-    --llm-model-config1 '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
-    --llm-engine2 huggingface \
-    --llm-model2 Qwen/Qwen1.5-4B-Chat \
-    --llm-model-config2 '{"torch_dtype":"auto","device_map":"auto"}'
-```
+  ```bash
+  chatways comparison \
+      --llm-engine1 openai \
+      --llm-model1 gpt-3.5-turbo \
+      --llm-model-config1 '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
+      --llm-engine2 huggingface \
+      --llm-model2 Qwen/Qwen1.5-4B-Chat \
+      --llm-model-config2 '{"torch_dtype":"auto","device_map":"auto"}'
+  ```
 
 - **Case 3** Set Partial Parameters with Abbreviations
 
-```bash
-chatways comparison \
-    --le1 openai \
-    --le2 huggingface \
-    --lc2 '{"torch_dtype":"auto","device_map":"auto"}'
-```
+  ```bash
+  chatways comparison \
+      --le1 openai \
+      --le2 huggingface \
+      --lc2 '{"torch_dtype":"auto","device_map":"auto"}'
+  ```
 
 ## Configuration
 
