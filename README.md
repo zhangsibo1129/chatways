@@ -35,13 +35,10 @@ Chatways provides a simple way to build chat applications with LLMs, offering te
     chatways simple --llm-engine fake --port 7860
     ```
 
-    > `simple` starts a basic chat application.
-    >
-    > `--llm-engine fake` uses a simulated LLM engine, requiring no local GPU or remote API.
-    >
-    > `--port 7860` sets the port address.
-    >
-    > For detailed parameter information, refer to the [templates](#templates).
+    - `simple` starts a basic chat application.
+    - `--llm-engine fake` uses a simulated LLM engine, requiring no local GPU or remote API.
+    - `--port 7860` sets the port address.
+    For detailed parameter information, refer to the [templates](#templates).
 
 3. Open your browser and visit `http://localhost:7860` to interact with the chat application.
 
@@ -57,13 +54,11 @@ Chatways offers a range of ready-to-use templates. Templates applications can be
 chatways [template] [options]
 ```
 
-> [template]: Specifies the type of application (e.g., simple, comparison, arxiv).
->
-> [options]: Configuration parameters:
->
->       --llm-engine (-le): LLM engine to use (e.g., openai, huggingface).
->       --llm-model (-lm): LLM model to use (e.g., llama).
->       --llm-config (-lc): Additional configuration in JSON format (e.g., {"device_map":"auto"}).
+- template: Specifies the type of application (e.g., simple, comparison, arxiv).
+- options: Configuration parameters:
+  - --llm-engine (-le): LLM engine to use (e.g., openai, huggingface).
+  - --llm-model (-lm): LLM model to use (e.g., llama).
+  - --llm-config (-lc): Additional configuration in JSON format (e.g., {"device_map":"auto"}).
 
 Here are some examples:
 

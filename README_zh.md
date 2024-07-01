@@ -35,13 +35,10 @@ Chatways 用于快速构建基于 LLM 的聊天应用，它提供了多种拿来
     chatways simple --llm-engine fake --port 7860
     ```
 
-    > `simple` 表示启动一个过简单的聊天应用
-    >
-    > `--llm-engine fake` 表示采用虚拟的 LLM 后端，可以在没有本地 GPU 或者远端 API 服务情况下，进行快速验证
-    >
-    > `--port 7860` 设置端口地址
-    >
-    > 详细的参数配置请参考[应用模板](#应用模板).
+    - `simple` 表示启动一个过简单的聊天应用
+    - `--llm-engine fake` 表示采用虚拟的 LLM 后端，可以在没有本地 GPU 或者远端 API 服务情况下，进行快速验证
+    - `--port 7860` 设置端口地址
+    详细的参数配置请参考[应用模板](#应用模板).
 
 3. 打开浏览器访问 `http://localhost:7860`，即可看到应用界面
 
@@ -57,13 +54,11 @@ Chatways 内置了多种拿来即用的应用模板，使用 `chatways` 命令�
 chatways [template] [options]
 ```
 
-> [template]: 指定应用的类型（例如：simple, comparison, arxiv）
->
-> [options]: 指定应用的配置（包括模型后端，名称和模型配置）
->
->       --llm-engine (-le): LLM 引擎 （例如：openai, huggingface）
->       --llm-model (-lm): LLM 模型 （例如：llama）
->       --llm-config (-lc): JSON 格式模型配置参数(例如：{"device_map":"auto"})
+- template: 指定应用的类型（例如：simple, comparison, arxiv）
+- options: 配置参数
+  - --llm-engine (-le): LLM 引擎 （例如：openai, huggingface）
+  - --llm-model (-lm): LLM 模型 （例如：llama）
+  - --llm-config (-lc): JSON 格式模型配置参数(例如：{"device_map":"auto"})
 
 以下是一些样例：
 
