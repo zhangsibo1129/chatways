@@ -35,8 +35,8 @@ Chatways 用于快速构建基于 LLM 的聊天应用，它提供了多种拿来
     chatways simple --llm-engine fake --port 7860
     ```
 
-    - `simple` 表示启动一个过简单的聊天应用
-    - `--llm-engine fake` 表示采用虚拟的 LLM 后端，可以在没有本地 GPU 或者远端 API 服务情况下，进行快速验证
+    - `simple` 启动一个简单的聊天应用
+    - `--llm-engine fake` 采用虚拟的 LLM 后端，在没有本地 GPU 或者远端 API 服务情况下，进行快速验证
     - `--port 7860` 设置端口地址
     详细的参数配置请参考[应用模板](#应用模板).
 
