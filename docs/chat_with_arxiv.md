@@ -1,64 +1,70 @@
 # Chat with arXiv
 
-在 arXiv 上更加智能、人性化地搜索学术论文
+Using LLM to make finding academic papers on arXiv more natural and insightful
 
-## 应用界面
+## Interface
 
 ![chat_with_arxiv](figures/chat_with_arxiv.png)
 
-## 启动命令
+## Command
 
-样例1，使用默认参数：
+General Form:
 
 ```bash
-python chat_with_arxiv.py
+chatways arxiv [options]
 ```
 
-样例2，指定参数：
+Case 1, Use Default Parameters:
 
 ```bash
-python chat_with_arxiv.py \
+chatways arxiv
+```
+
+Case 2, Config with Full Parameters:
+
+```bash
+chatways arxiv \
     --llm-engine openai \
     --llm-model gpt-3.5-turbo \
     --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
 ```
 
-样例3，用简称指定部分参数：
+Case 3, Set Partial Parameters with Abbreviations:
 
 ```bash
-python chat_with_arxiv.py \
+chatways arxiv \
     -le huggingface \
     -lc '{"torch_dtype":"auto","device_map":"auto"}'
 ```
 
-## 配置参数
+## Configuration
 
 - **Address**
-  - **全称**: `--address`
-  - **简称**: `-a`
-  - **默认值**: `"127.0.0.1"`
-  - **描述**: 指定应用程序绑定的地址。默认值为 `127.0.0.1`
+  - **Full Name**: `--address`
+  - **Abbreviation**: `-a`
+  - **Default Value**: `"127.0.0.1"`
+  - **Description**: Address to which the application binds
 
 - **Port**
-  - **全称**: `--port`
-  - **简称**: `-p`
-  - **默认值**: `7860`
-  - **描述**: 指定应用程序绑定的端口号。默认值为 `7860`
+  - **Full Name**: `--port`
+  - **Abbreviation**: `-p`
+  - **Default Value**: `7860`
+  - **Description**: Port number to which the application binds
 
 - **LLM Engine**
-  - **全称**: `--llm-engine`
-  - **简称**: `-le`
-  - **默认值**: `None`
-  - **描述**: 指定 LLM 引擎
+  - **Full Name**: `--llm-engine`
+  - **Abbreviation**: `-le`
+  - **Default Value**: `None`
+  - **Description**: LLM engine
 
 - **LLM Model**
-  - **全称**: `--llm-model`
-  - **简称**: `-lm`
-  - **默认值**: `None`
-  - **描述**: 指定第 LLM 路径或名称
+  - **Full Name**: `--llm-model`
+  - **Abbreviation**: `-lm`
+  - **Default Value**: `None`
+  - **Description**: LLM model path or name
 
 - **LLM Model Config**
-  - **全称**: `--llm-model-config`
-  - **简称**: `-lc`
-  - **默认值**: `None`
-  - **描述**: 指定 LLM 的 JSON 格式配置文件
+  - **Full Name**: `--llm-model-config`
+  - **Abbreviation**: `-lc`
+  - **Default Value**: `None`
+  - **Description**: JSON configuration for the LLM

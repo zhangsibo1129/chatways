@@ -1,23 +1,29 @@
 # Chat Comparison
 
-同时与两个 LLM 对话，针对同一输入，比较两个 LLM 的输出
+Chat with 2 LLMs simultaneously and compare their results
 
-## 应用界面
+## Interface
 
 ![chat_comparison](figures/chat_comparison.png)
 
-## 启动命令
+## Command
 
-样例1，使用默认参数：
+General Form:
 
 ```bash
-python chat_comparison.py
+chatways comparison [options]
 ```
 
-样例2，指定参数：
+Case 1, Use Default Parameters:
 
 ```bash
-python chat_comparison.py \
+chatways comparison
+```
+
+Case 2, Config with Full Parameters:
+
+```bash
+chatways comparison \
     --llm-engine1 openai \
     --llm-model1 gpt-3.5-turbo \
     --llm-model-config1 '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
@@ -26,62 +32,61 @@ python chat_comparison.py \
     --llm-model-config2 '{"torch_dtype":"auto","device_map":"auto"}'
 ```
 
-样例3，用简称指定部分参数：
+Case 3, Set Partial Parameters with Abbreviations:
 
 ```bash
-python chat_comparison.py \
+chatways comparison \
     --le1 openai \
     --le2 huggingface \
     --lc2 '{"torch_dtype":"auto","device_map":"auto"}'
 ```
 
-## 配置参数
-
+## Configuration
 
 - **Address**
-  - **全称**: `--address`
-  - **简称**: `-a`
-  - **默认值**: `"127.0.0.1"`
-  - **描述**: 指定应用程序绑定的地址。默认值为 `127.0.0.1`。
+  - **Full Name**: `--address`
+  - **Abbreviation**: `-a`
+  - **Default Value**: `"127.0.0.1"`
+  - **Description**: Address to which the application binds
 
 - **Port**
-  - **全称**: `--port`
-  - **简称**: `-p`
-  - **默认值**: `7860`
-  - **描述**: 指定应用程序绑定的端口号。默认值为 `7860`。
+  - **Full Name**: `--port`
+  - **Abbreviation**: `-p`
+  - **Default Value**: `7860`
+  - **Description**: Port number to which the application binds
 
 - **LLM Engine 1**
-  - **全称**: `--llm-engine1`
-  - **简称**: `-le1`
-  - **默认值**: `None`
-  - **描述**: 指定第一个LLM引擎。
+  - **Full Name**: `--llm-engine1`
+  - **Abbreviation**: `-le1`
+  - **Default Value**: `None`
+  - **Description**: The first LLM engine
 
 - **LLM Model 1**
-  - **全称**: `--llm-model1`
-  - **简称**: `-lm1`
-  - **默认值**: `None`
-  - **描述**: 指定第一个LLM模型路径。
+  - **Full Name**: `--llm-model1`
+  - **Abbreviation**: `-lm1`
+  - **Default Value**: `None`
+  - **Description**: The first LLM model path or name
 
 - **LLM Model Config 1**
-  - **全称**: `--llm-model-config1`
-  - **简称**: `-lc1`
-  - **默认值**: `None`
-  - **描述**: 指定第一个LLM模型的JSON格式配置文件。
+  - **Full Name**: `--llm-model-config1`
+  - **Abbreviation**: `-lc1`
+  - **Default Value**: `None`
+  - **Description**: The first JSON configuration for the LLM
 
 - **LLM Engine 2**
-  - **全称**: `--llm-engine2`
-  - **简称**: `-le2`
-  - **默认值**: `None`
-  - **描述**: 指定第二个LLM引擎。
+  - **Full Name**: `--llm-engine2`
+  - **Abbreviation**: `-le2`
+  - **Default Value**: `None`
+  - **Description**: The second LLM engine
 
 - **LLM Model 2**
-  - **全称**: `--llm-model2`
-  - **简称**: `-lm2`
-  - **默认值**: `None`
-  - **描述**: 指定第二个LLM模型路径。
+  - **Full Name**: `--llm-model2`
+  - **Abbreviation**: `-lm2`
+  - **Default Value**: `None`
+  - **Description**: The second LLM model path or name
 
 - **LLM Model Config 2**
-  - **全称**: `--llm-model-config2`
-  - **简称**: `-lc2`
-  - **默认值**: `None`
-  - **描述**: 指定第二个LLM模型的JSON格式配置文件。
+  - **Full Name**: `--llm-model-config2`
+  - **Abbreviation**: `-lc2`
+  - **Default Value**: `None`
+  - **Description**: The second JSON configuration for the LLM

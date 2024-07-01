@@ -138,9 +138,9 @@ Chatways 提供了高度抽象的 `bot` 模块，该模块使开发者通过简�
 
 | 类型 | 功能 | 启动命令 |
 |:----------:|----------|----------|
-| [**Chat**](docs/simple_chat.md) | 简单的聊天应用，实现与 LLM 的多轮对话 | `chatways simple [options]` |
-| [**Chat Comparison**](docs/chat_comparison.md) | 同时与2个LLM进行对话，对二者的结果进行对照 | `chatways comparison [options]` |
-| [**Chat with arXiv**](docs/chat_with_arxiv.md) | 在 arXiv 上更加智能、人性化地搜索学术论文 | `chatways arxiv [options]` |
+| [**Chat**](docs/simple_chat_zh.md) | 简单的聊天应用，实现与 LLM 的多轮对话 | `chatways simple [options]` |
+| [**Chat Comparison**](docs/chat_comparison_zh.md) | 同时与2个LLM进行对话，对二者的结果进行对照 | `chatways comparison [options]` |
+| [**Chat with arXiv**](docs/chat_with_arxiv_zh.md) | 在 arXiv 上更加智能、人性化地搜索学术论文 | `chatways arxiv [options]` |
 
 ## 贡献
 
