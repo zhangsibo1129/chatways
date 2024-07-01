@@ -8,19 +8,19 @@ Simple chat application that enables multi-round conversations with LLM
 
 ## Command
 
-General Form:
+General Form
 
 ```bash
 chatways simple [options]
 ```
 
-Case 1, Use Default Parameters:
+- **Case 1** Use Default Parameters
 
 ```bash
 chatways simple
 ```
 
-Case 2, Config with Full Parameters:
+- **Case 2** Config with Full Parameters
 
 ```bash
 chatways simple \
@@ -29,7 +29,7 @@ chatways simple \
     --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
 ```
 
-Case 3, Set Partial Parameters with Abbreviations:
+- **Case 3** Set Partial Parameters with Abbreviations
 
 ```bash
 chatways simple \

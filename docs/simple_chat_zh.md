@@ -8,19 +8,19 @@
 
 ## 启动命令
 
-一般形式：
+一般形式
 
 ```bash
 chatways simple [options]
 ```
 
-样例1，使用默认参数：
+- **样例1** 使用默认参数
 
 ```bash
 chatways simple
 ```
 
-样例2，设置完整参数：
+- **样例2** 设置完整参数
 
 ```bash
 chatways simple \
@@ -29,7 +29,7 @@ chatways simple \
     --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
 ```
 
-样例3，用简称指定部分参数：
+- **样例3** 用简称指定部分参数
 
 ```bash
 chatways simple \

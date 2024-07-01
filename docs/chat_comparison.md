@@ -8,19 +8,19 @@ Chat with 2 LLMs simultaneously and compare their results
 
 ## Command
 
-General Form:
+General Form
 
 ```bash
 chatways comparison [options]
 ```
 
-Case 1, Use Default Parameters:
+- **Case 1** Use Default Parameters
 
 ```bash
 chatways comparison
 ```
 
-Case 2, Config with Full Parameters:
+- **Case 2** Config with Full Parameters
 
 ```bash
 chatways comparison \
@@ -32,7 +32,7 @@ chatways comparison \
     --llm-model-config2 '{"torch_dtype":"auto","device_map":"auto"}'
 ```
 
-Case 3, Set Partial Parameters with Abbreviations:
+- **Case 3** Set Partial Parameters with Abbreviations
 
 ```bash
 chatways comparison \

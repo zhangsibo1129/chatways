@@ -8,20 +8,19 @@
 
 ## 启动命令
 
-一般形式：
+一般形式
 
 ```bash
 chatways comparison [options]
 ```
 
-
-样例1，使用默认参数：
+- **样例1** 使用默认参数
 
 ```bash
 chatways comparison
 ```
 
-样例2，设置完整参数：
+- **样例2** 设置完整参数
 
 ```bash
 chatways comparison \
@@ -33,7 +32,7 @@ chatways comparison \
     --llm-model-config2 '{"torch_dtype":"auto","device_map":"auto"}'
 ```
 
-样例3，用简称指定部分参数：
+- **样例3** 用简称指定部分参数
 
 ```bash
 chatways comparison \

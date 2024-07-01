@@ -8,19 +8,19 @@ Using LLM to make finding academic papers on arXiv more natural and insightful
 
 ## Command
 
-General Form:
+General Form
 
 ```bash
 chatways arxiv [options]
 ```
 
-Case 1, Use Default Parameters:
+- **Case 1** Use Default Parameters
 
 ```bash
 chatways arxiv
 ```
 
-Case 2, Config with Full Parameters:
+- **Case 2** Config with Full Parameters
 
 ```bash
 chatways arxiv \
@@ -29,7 +29,7 @@ chatways arxiv \
     --llm-model-config '{"api_key":"openai_api_key","base_url":"openai_base_url"}'
 ```
 
-Case 3, Set Partial Parameters with Abbreviations:
+- **Case 3** Set Partial Parameters with Abbreviations
 
 ```bash
 chatways arxiv \
