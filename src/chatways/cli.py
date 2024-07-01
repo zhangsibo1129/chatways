@@ -11,7 +11,7 @@ def generate_command(args, filename):
             continue
         if key != "command" and key != "func":
             key = key.replace("_", "-")
-            if isinstance(value, str) and value.startswith('{') and value.endswith('}'):
+            if isinstance(value, str) and value.startswith("{") and value.endswith("}"):
                 value = f"'{value}'"
             arguments += f"--{key} {value} "
     command = "python " + file_path + arguments
