@@ -24,8 +24,11 @@ class HFChatModel(BaseChatModel):
             self.model = model
         if model_config is None:
             model_config = {}
+        model_config.update(trust_remote_code=True)
         self.client = AutoModelForCausalLM.from_pretrained(self.model, **model_config)
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.model, trust_remote_code=True
+        )
 
     def _prepare_inputs(self, messages: List[Dict]):
         raw_inputs = self.tokenizer.apply_chat_template(
