@@ -187,7 +187,7 @@ with gr.Blocks(css=CSS) as demo:
             )
 
     with gr.Row():
-        inputs = gr.Textbox(placeholder="Input", show_label=False, lines=2, scale=8)
+        inputs = gr.Textbox(placeholder="Input", show_label=False, scale=8)
         clean_btn = gr.Button(scale=1, value="Clean", variant="stop")
         send_btn = gr.Button(scale=1, value="Send", variant="primary")
 
