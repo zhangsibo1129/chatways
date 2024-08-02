@@ -7,6 +7,7 @@ LLM_REGISTRY_MAP = {
     "openai": "OpenAIChatModel",
     "huggingface": "HFChatModel",
     "fake": "FakeChatModel",
+    "openmind": "OMChatModel",
 }
 
 LLM_REGISTRY = Registry("llm", LLM_REGISTRY_MAP)

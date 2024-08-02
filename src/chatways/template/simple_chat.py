@@ -38,6 +38,13 @@ FAKE_PARAMETERS = [
     ("max_new_tokens", 512, 0, 1024, 1),
 ]
 
+OM_PARAMETERS = [
+    ("temperature", 1.0, 0.0, 2.0, 0.01),
+    ("top_k", 50, 0, 100, 1),
+    ("top_p", 1.0, 0.0, 2.0, 0.01),
+    ("max_new_tokens", 512, 0, 1024, 1),
+]
+
 
 # Step 2. Argument Parsing
 def parse_args():
@@ -90,6 +97,8 @@ def get_generation_config(components):
         parameters = HF_PARAMETERS
     elif args.llm_engine == "fake":
         parameters = FAKE_PARAMETERS
+    elif args.llm_engine == "openmind":
+        parameters = OM_PARAMETERS
 
     parameter_components = components[: int(len(components) / 2)]
     availabel_components = components[int(len(components) / 2) :]
@@ -168,6 +177,8 @@ with gr.Blocks(css=CSS) as demo:
             parameters = HF_PARAMETERS
         elif args.llm_engine == "fake":
             parameters = FAKE_PARAMETERS
+        elif args.llm_engine == "openmind":
+            parameters = OM_PARAMETERS
 
         availabel_components = []
         parameter_components = []
