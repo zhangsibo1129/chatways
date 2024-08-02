@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="chatways",
-    version="0.1.0-dev4",
+    version="0.1.0-dev4-om",
     package_dir={"": "src"},
     packages=find_packages("src"),
     include_package_data=True,
