@@ -1,5 +1,6 @@
 from threading import Thread
 from openmind import AutoModelForCausalLM, AutoTokenizer
+from transformers import TextIteratorStreamer
 from typing import Optional, Dict, List, Any
 from chatways.llm.utils import BaseChatModel, register_llm
 
